@@ -130,3 +130,61 @@ return basePrice - quantityDiscount + shipping;
 ```
 
 ````
+
+---
+
+# Inline Variable
+
+````md magic-move {lines: true}
+
+```csharp {*|2}
+// before
+var basePrice = order.BasePrice;
+return (basePrice > 1000);
+```
+
+```csharp {*}
+// after
+return order.BasePrice > 1000;
+```
+
+````
+
+---
+
+# Change Function Declaration
+
+## Rename Function
+
+````md magic-move {lines: true}
+
+```csharp {*|4}
+// before
+public Circum(double radius)
+{
+  return 2 * Math.PI * radius;
+}
+```
+
+```csharp {4|7-10|*}
+// extract function
+public Circum(double radius)
+{
+  return Circumference(radius);
+}
+
+public Circumference(double radius)
+{
+  return 2 * Math.PI * radius;
+}
+```
+
+```csharp {*}
+// inline function
+public Circumference(double radius)
+{
+  return 2 * Math.PI * radius;
+}
+```
+
+````

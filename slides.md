@@ -42,16 +42,16 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
+
 transition: fade-out
 ---
 
-# Extract function
-
+# Extract Function
 
 ````md magic-move {lines: true}
 
 ```csharp {*|6-8}
-// step 1
+// before
 public void PrintOwing()
 {
     var outstanding = calculateOutstanding();
@@ -63,7 +63,7 @@ public void PrintOwing()
 ```
 
 ```csharp {6,9-13|*}
-// step 2
+// after
 public void PrintOwing()
 {
     var outstanding = calculateOutstanding();
@@ -75,6 +75,36 @@ private printDetails(string name, decimal outstanding)
 {
     Console.WriteLine("name: {0}", name);
     Console.WriteLine("amount: {0}", outstanding);
+}
+```
+
+````
+
+---
+
+# Inline Function
+
+````md magic-move {lines: true}
+
+```csharp {*|4,7-10}
+// before
+public int GetRating(Driver driver)
+{
+    return MoreThanFiveLateDeliveries(driver) ? 2 : 1;
+}
+
+public bool MoreThanFiveLateDeliveries(Driver driver)
+{
+    return driver.numberOfLateDeliveries > 5;
+}
+
+```
+
+```csharp {*}
+// after
+public int GetRating(Driver driver)
+{
+    return (driver.numberOfLateDeliveries > 5) ? 2 : 1;
 }
 ```
 

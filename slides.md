@@ -106,3 +106,27 @@ public int GetRating(Driver driver)
 ```
 
 ````
+
+---
+
+# Extract Variable
+
+````md magic-move {lines: true}
+
+```csharp {*|2|3|4}
+// before
+return order.Quantity * order.ItemPrice 
+  - Math.Max(0, order.Quantity - 500) * order.ItemPrice * 0.05 
+  + Math.Min(order.Quantity * order.ItemPrice * 0.1, 100);
+
+```
+
+```csharp {2|3|4|*}
+// after
+var basePrice = order.Quantity * order.ItemPrice;
+var quantityDiscount = Math.Max(0, order.Quantity - 500) * order.ItemPrice * 0.05;
+var shipping = Math.Min(order.Quantity * order.ItemPrice * 0.1, 100);
+return basePrice - quantityDiscount + shipping;
+```
+
+````
